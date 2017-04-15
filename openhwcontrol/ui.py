@@ -18,6 +18,7 @@ from serial.tools import list_ports
 from hue_plus import webcolors
 
 from leviathan.cooler import Cooler
+import usb.core
 
 def is_admin():
     if os.name == 'nt':
@@ -150,6 +151,7 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
             self.cooler = Cooler(0x2433, 0xb200)
         else:
             self.cooler = None
+            print("None")
 
     #leviathan
     def color_mode(self,arg):
@@ -203,7 +205,9 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
         for i in buttons:
             if i.isChecked():
                 mode = self.color_mode(i)
-        self.error("Status: " + str(cooler.update()))
+        #print(speed, color1, color2, interval, mode, type(color1[0]))
+        if self.cooler:
+            self.error("Status: " + str(self.cooler.update()))
 
     def error(self, message):
         msg = QMessageBox()
@@ -222,10 +226,10 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
             return None
 
     def update(self):
-        with urllib.request.urlopen('https://raw.githubusercontent.com/kusti8/openhwcontrol/master/version') as response:
+        with urllib.request.urlopen('https://raw.githubusercontent.com/kusti8/OpenHWControl/master/version') as response:
             version_new = response.read().strip()
             if versiontuple(version_new.decode()) > versiontuple(VERSION):
-                self.error("There is a new update available. Download it from https://github.com/kusti8/openhwcontrol")
+                self.error("There is a new update available. Download it from https://github.com/kusti8/OpenHWControl")
 
     def getChannel(self):
         if self.channel1Check.isChecked() and self.channel2Check.isChecked():
