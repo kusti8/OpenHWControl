@@ -11,11 +11,11 @@ from PyQt5.QtWidgets import QGridLayout, QLabel, QLineEdit, QMessageBox, QColorD
 from PyQt5.QtWidgets import QTextEdit, QWidget, QMainWindow, QApplication, QListWidgetItem
 
 from . import gui
-from hue_plus import hue
+from . import hue
 import serial
 from serial.tools import list_ports
 
-from hue_plus import webcolors
+from . import webcolors
 
 from . import cooler
 import usb.core
