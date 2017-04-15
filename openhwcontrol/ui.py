@@ -17,7 +17,7 @@ from serial.tools import list_ports
 
 from hue_plus import webcolors
 
-from leviathan.cooler import Cooler
+from . import cooler
 import usb.core
 
 def is_admin():
@@ -148,7 +148,7 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
             self.error("Serial port is invalid. Try /dev/ttyACM0 for Linux or COM3 or COM4 for Windows")
 
         if list(usb.core.find(idVendor=0x2433, idProduct=0xb200, find_all=True)):
-            self.cooler = Cooler(0x2433, 0xb200)
+            self.cooler = cooler.Cooler(0x2433, 0xb200)
         else:
             self.cooler = None
             print("None")
@@ -156,10 +156,10 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
     #leviathan
     def color_mode(self,arg):
         buttons = {
-            self.krakenNormal: Cooler.COLOR_MODE_NORMAL,
-            self.krakenAlternating: Cooler.COLOR_MODE_ALTERNATING,
-            self.krakenBlinking: Cooler.COLOR_MODE_BLINKING,
-            self.krakenOff: Cooler.COLOR_MODE_OFF
+            self.krakenNormal: cooler.Cooler.COLOR_MODE_NORMAL,
+            self.krakenAlternating: cooler.Cooler.COLOR_MODE_ALTERNATING,
+            self.krakenBlinking: cooler.Cooler.COLOR_MODE_BLINKING,
+            self.krakenOff: cooler.Cooler.COLOR_MODE_OFF
             }
         return buttons[arg]
 
@@ -201,11 +201,11 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
         color1 = webcolors.hex_to_rgb('#' + self.getColors(self.krakenMainList)[0])
         color2 = webcolors.hex_to_rgb('#' + self.getColors(self.krakenAlternateList)[0])
         interval = self.krakenInterval.value()
-        mode = Cooler.COLOR_MODE_NORMAL
+        mode = cooler.Cooler.COLOR_MODE_NORMAL
         for i in buttons:
             if i.isChecked():
                 mode = self.color_mode(i)
-        #print(speed, color1, color2, interval, mode, type(color1[0]))
+        print(speed, color1, color2, interval, mode, type(color1[0]))
         if self.cooler:
             self.error("Status: " + str(self.cooler.update()))
 
