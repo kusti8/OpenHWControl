@@ -20,7 +20,6 @@ setup(name='openhwcontrol',
       },
       install_requires=[
           'hue_plus',
-          'leviathan',
       ],
       keywords = 'nzxt hue hue-plus hue_plus hue+ openhwcontrol kraken',
       include_package_data=True,
