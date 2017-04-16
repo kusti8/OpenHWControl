@@ -10,14 +10,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QGridLayout, QLabel, QLineEdit, QMessageBox, QColorDialog
 from PyQt5.QtWidgets import QTextEdit, QWidget, QMainWindow, QApplication, QListWidgetItem
 
-from . import gui
-from . import hue
+from hue_plus import hue
 import serial
 from serial.tools import list_ports
 
-from . import webcolors
+from hue_plus import webcolors
 
-from . import cooler
+from openhwcontrol import gui
+from openhwcontrol import cooler
 import usb.core
 
 def is_admin():
