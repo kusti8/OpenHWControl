@@ -481,6 +481,7 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
             # Handle unsuccessful initialization
             else:
                 # As there is a communication problem, reset the "serial port" combo box
+                print("")
                 index = self.comboBoxComPorts.findText("<Select port>")
                 self.comboBoxComPorts.setCurrentIndex(index)
 
