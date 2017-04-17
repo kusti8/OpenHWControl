@@ -5,6 +5,7 @@
 """
 
 from PyQt5 import QtCore, QtWidgets, QtGui
+import os
 
 from openhwcontrol import openhwmon
 

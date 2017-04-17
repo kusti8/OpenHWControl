@@ -6,6 +6,7 @@
 """
 
 import sys
+import os
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 from openhwcontrol import helper

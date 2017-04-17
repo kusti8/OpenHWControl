@@ -7,6 +7,7 @@
 
 import sys
 import time
+import os
 
 from PyQt5 import QtCore
 
@@ -100,7 +101,9 @@ class PollingThread(QtCore.QThread):
         print("Thread stopped")
 
         # Uninitialize at thread stop (used for WMI in thread)
-        pythoncom.CoUninitialize()
+        if os.name == 'nt':
+            import pythoncom
+            pythoncom.CoUninitialize()
 
     def set_temp_calc(self, cpu_calc, gpu_calc):
         """Setter for cpu and gpu calc parameter."""

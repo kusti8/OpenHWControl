@@ -118,7 +118,8 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
             }
         self.indexDevices = {
             0: self.presetModeWidget,
-            1: self.krakenApplyFunc
+            1: self.krakenApplyFunc,
+            2: lambda: None
         }
 
         self.fixedAdd.clicked.connect(self.fixedAddFunc)
