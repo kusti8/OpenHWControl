@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'openhw-gui.ui'
 #
-# Created by: PyQt5 UI code generator 5.8.2
+# Created by: PyQt5 UI code generator 5.8
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -2295,6 +2295,8 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_107.setFont(font)
+        self.label_107.setTextFormat(QtCore.Qt.RichText)
+        self.label_107.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
         self.label_107.setObjectName("label_107")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
