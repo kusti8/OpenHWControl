@@ -164,7 +164,7 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
             with serial.Serial(self.portTxt.text(), 256000) as ser:
                 hue.write_previous(ser)
         except serial.serialutil.SerialException:
-            self.error("Serial port is invalid. Try /dev/ttyACM0 for Linux or COM3 or COM4 for Windows")
+            pass
 
         if list(usb.core.find(idVendor=0x2433, idProduct=0xb200, find_all=True)):
             self.cooler = cooler.Cooler(0x2433, 0xb200)

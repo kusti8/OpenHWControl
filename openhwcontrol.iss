@@ -33,4 +33,4 @@ Name: "{commondesktop}\OpenHWControl"; Filename: "{app}\ui.exe"; Tasks: desktopi
 Name: "{commonprograms}\OpenHardwareMonitor"; Filename: "{app}\OpenHardwareMonitor.exe"
 
 [Run]
-Filename: "{app}\ui.exe"; Description: "{cm:LaunchProgram,OpenHWControl}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\ui.exe"; Description: "{cm:LaunchProgram,OpenHWControl}"; WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent
