@@ -32,6 +32,3 @@ Source: "build\exe.win-amd64-3.5\*"; DestDir: "{app}"; Flags: ignoreversion recu
 Name: "{commonprograms}\OpenHWControl"; Filename: "{app}\ui.exe"; WorkingDir: "{app}"
 Name: "{commondesktop}\OpenHWControl"; Filename: "{app}\ui.exe"; Tasks: desktopicon; WorkingDir: "{app}"
 Name: "{commonprograms}\OpenHardwareMonitor"; Filename: "{app}\OpenHardwareMonitor.exe"
-
-[Run]
-Filename: "{app}\ui.exe"; Description: "{cm:LaunchProgram,OpenHWControl}"; WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent
