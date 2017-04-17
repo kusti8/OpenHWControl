@@ -12,7 +12,7 @@ AppVersion=1.0.0
 AppPublisher=Gustav Hansen
 DefaultDirName={pf}\OpenHWControl
 DisableProgramGroupPage=yes
-OutputBaseFilename=setup
+OutputBaseFilename=openhwcontrol-amd64-setup
 Compression=lzma
 SolidCompression=yes
 
@@ -23,8 +23,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "build\exe.win-amd64-3.5\ui.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "build\exe.win-amd64-3.5\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "build\exe*\ui.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "build\exe*\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
