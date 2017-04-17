@@ -53,6 +53,8 @@ def read_settings(config, ui, hwmon):
     # Get all available temperature sensors
     if hwmon:
         sensors = openhwmon.get_temperature_sensors(hwmon)
+    else:
+        sensors = []
 
     # Selected CPU sensors
     parent = ui.treeWidgetSelectedCPUSensors

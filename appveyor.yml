@@ -49,10 +49,13 @@ install:
   # pip will build them from source using the MSVC compiler matching the
   # target Python version and architecture
   - "%CMD_IN_ENV% pip install cx_freeze pyqt5 pyusb hue_plus"
+  - "choco install -y InnoSetup"
 
 build_script:
   # Build the compiled extension
-  - "%CMD_IN_ENV% python setup-exe.py bdist_msi"
+  - "%CMD_IN_ENV% python setup-exe.py build"
+  - set PATH=%PATH%;"C:\\Program Files (x86)\\Inno Setup 5"
+  - iscc openhwcontrol.iss
 
 test_script:
 
@@ -60,4 +63,4 @@ after_test:
 
 artifacts:
   # Archive the generated packages in the ci.appveyor.com build report.
-  - path: dist\*
+  - path: Output\*

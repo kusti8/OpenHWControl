@@ -1,6 +1,22 @@
 import sys
 from cx_Freeze import setup, Executable
 
+shortcut_table = [
+    ("DesktopShortcut",        # Shortcut
+     "DesktopFolder",          # Directory_
+     "OpenHWControl",           # Name
+     "TARGETDIR",              # Component_
+     "[TARGETDIR]playlist.exe",# Target
+     None,                     # Arguments
+     None,                     # Description
+     None,                     # Hotkey
+     None,                     # Icon
+     None,                     # IconIndex
+     None,                     # ShowCmd
+     'TARGETDIR'               # WkDir
+     )
+    ]
+
 build_exe_options = {"include_files": ["libusb-1.0.dll", "OpenHWMonitor/Aga.Controls.dll", "OpenHWMonitor/OpenHardwareMonitor.config", "OpenHWMonitor/OpenHardwareMonitor.exe", "OpenHWMonitor/OpenHardwareMonitor.exe.config", "OpenHWMonitor/OpenHardwareMonitorLib.dll", "OpenHWMonitor/OxyPlot.dll", "OpenHWMonitor/OxyPlot.WindowsForms.dll", "OpenHWMonitor/License.html"]}
 
 setup(name='openhwcontrol',
