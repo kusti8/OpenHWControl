@@ -96,10 +96,7 @@ def initialize_grid(ser, lock):
                 return False
 
     except Exception as e:
-            helper.show_error("Problem initializing the Grid unit.\n\n"
-                              "Exception:\n" + str(e) + "\n\n"
-                              "The application will now exit.")
-            sys.exit(0)
+            pass
 
 
 def set_fan(ser, fan, voltage, lock):

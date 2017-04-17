@@ -178,7 +178,8 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
         self.config = QtCore.QSettings('OpenHWControl', 'App')
         self.serial_ports = grid.get_serial_ports()
         self.comboBoxComPorts.addItems(self.serial_ports)
-        openhwmon.populate_tree(self.hwmon, self.treeWidgetHWMonData)
+        if self.hwmon:
+            openhwmon.populate_tree(self.hwmon, self.treeWidgetHWMonData)
         settings.read_settings(self.config, self, self.hwmon)
         self.thread = polling.PollingThread(polling_interval=int(self.comboBoxPolling.currentText()),
                                             ser=self.ser,

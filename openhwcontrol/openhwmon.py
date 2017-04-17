@@ -18,6 +18,7 @@ def initialize_hwmon():
     # Access the OpenHWMon WMI interface
     if os.name != 'nt':
         return None
+        helper.show_notification("Linux")
     try:
         import wmi
         hwmon = wmi.WMI(namespace="root\OpenHardwareMonitor")
@@ -25,7 +26,7 @@ def initialize_hwmon():
 
     # WMI exception (e.g. no namespace "root\OpenHardwareMonitor" indicates OpenHWMon is not installed
     except:
-        pass
+        return None
 
 def populate_tree_linux(treeWidget):
     import psutil
