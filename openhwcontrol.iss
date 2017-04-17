@@ -28,8 +28,8 @@ Source: "build\exe.win-amd64-3.5\*"; DestDir: "{app}"; Flags: ignoreversion recu
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{commonprograms}\OpenHWControl"; Filename: "{app}\ui.exe"
-Name: "{commondesktop}\OpenHWControl"; Filename: "{app}\ui.exe"; Tasks: desktopicon
+Name: "{commonprograms}\OpenHWControl"; Filename: "{app}\ui.exe"; WorkingDir: "{app}"
+Name: "{commondesktop}\OpenHWControl"; Filename: "{app}\ui.exe"; Tasks: desktopicon; WorkingDir: "{app}"
 Name: "{commonprograms}\OpenHardwareMonitor"; Filename: "{app}\OpenHardwareMonitor.exe"
 
 [Run]
