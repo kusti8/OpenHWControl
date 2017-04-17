@@ -2299,7 +2299,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "hue_plus"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "OpenHWControl"))
         self.groupBox.setTitle(_translate("MainWindow", "Colors"))
         self.fixedAdd.setText(_translate("MainWindow", "Add color"))
         self.fixedDelete.setText(_translate("MainWindow", "Delete color"))
