@@ -66,11 +66,14 @@ def read_settings(config, ui, hwmon):
     else:
         for id in config.value("cpu_sensor_ids", type=str):
             item = QtWidgets.QTreeWidgetItem(parent)
-            for sensor in sensors:
-                if sensor.label == id:
-                    item.setText(0, sensor.label)
-            item.setText(1, id)
-            item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
+            for parenta, nodes in sensors.items():
+                for sensor in nodes:
+                    if sensor.label == id:
+                        item.setText(0, sensor.label)
+                    elif parent == id:
+                        item.setText(0, parenta)
+                item.setText(1, id)
+                item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
 
     # Selected GPU sensors
     parent = ui.treeWidgetSelectedGPUSensors
@@ -83,13 +86,16 @@ def read_settings(config, ui, hwmon):
             item.setText(1, id)
             item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
     else:
-        for id in config.value("cpu_sensor_ids", type=str):
+        for id in config.value("gpu_sensor_ids", type=str):
             item = QtWidgets.QTreeWidgetItem(parent)
-            for sensor in sensors:
-                if sensor.label == id:
-                    item.setText(0, sensor.label)
-            item.setText(1, id)
-            item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
+            for parenta, nodes in sensors.items():
+                for sensor in nodes:
+                    if sensor.label == id:
+                        item.setText(0, sensor.label)
+                    elif parent == id:
+                        item.setText(0, parenta)
+                item.setText(1, id)
+                item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
 
     # Radio buttons
     ui.radioButtonCPUMax.setChecked(config.value("cpu_use_max", True, type=bool))

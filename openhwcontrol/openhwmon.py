@@ -46,8 +46,12 @@ def populate_tree_linux(treeWidget):
         for index, node in enumerate(nodelist):
             parent = item
             itema = QtWidgets.QTreeWidgetItem(parent)
-            itema.setText(0, node.label)  # First column, name of the node
-            itema.setText(1, node.label)  # Second column, node id
+            if not node.label:
+                name = key
+            else:
+                name = node.label
+            itema.setText(0, name)  # First column, name of the node
+            itema.setText(1, name)  # Second column, node id
             itema.setText(2, str(node.current))  # Third column, temperature value
             itema.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))
             itema.setForeground(2, QtGui.QBrush(QtCore.Qt.blue))
@@ -176,7 +180,6 @@ def get_temperature_sensors(hwmon):
     else:
         import psutil
         sensors = psutil.sensors_temperatures()
-        sensors = [s for key, s in sensors.items()]
     return sensors
 
 def get_temp(hwmon, id):

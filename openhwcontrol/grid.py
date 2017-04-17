@@ -18,6 +18,8 @@ WAIT_GRID = 0.04
 
 def get_serial_ports():
     """Returns a list of all serial ports found, e.g. 'COM1' in Windows"""
+    # Grid simulator
+    # return ['/dev/pts/4']
     return sorted([port.device for port in list_ports.comports()])
 
 def setup_serial(ser, port, lock):
