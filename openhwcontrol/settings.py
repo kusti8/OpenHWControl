@@ -6,7 +6,7 @@
 
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-import openhwmon
+from openhwcontrol import openhwmon
 
 
 def read_settings(config, ui, hwmon):
@@ -54,23 +54,41 @@ def read_settings(config, ui, hwmon):
 
     # Selected CPU sensors
     parent = ui.treeWidgetSelectedCPUSensors
-    for id in config.value("cpu_sensor_ids", type=str):
-        item = QtWidgets.QTreeWidgetItem(parent)
-        for sensor in sensors:
-            if sensor.Identifier == id:
-                item.setText(0, sensor.Name)
-        item.setText(1, id)
-        item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
+    if os.name == 'nt':
+        for id in config.value("cpu_sensor_ids", type=str):
+            item = QtWidgets.QTreeWidgetItem(parent)
+            for sensor in sensors:
+                if sensor.Identifier == id:
+                    item.setText(0, sensor.Name)
+            item.setText(1, id)
+            item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
+    else:
+        for id in config.value("cpu_sensor_ids", type=str):
+            item = QtWidgets.QTreeWidgetItem(parent)
+            for sensor in sensors:
+                if sensor.label == id:
+                    item.setText(0, sensor.label)
+            item.setText(1, id)
+            item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
 
     # Selected GPU sensors
     parent = ui.treeWidgetSelectedGPUSensors
-    for id in config.value("gpu_sensor_ids", type=str):
-        item = QtWidgets.QTreeWidgetItem(parent)
-        for sensor in sensors:
-            if sensor.Identifier == id:
-                item.setText(0, sensor.Name)
-        item.setText(1, id)
-        item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
+    if os.name == 'nt':
+        for id in config.value("gpu_sensor_ids", type=str):
+            item = QtWidgets.QTreeWidgetItem(parent)
+            for sensor in sensors:
+                if sensor.Identifier == id:
+                    item.setText(0, sensor.Name)
+            item.setText(1, id)
+            item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
+    else:
+        for id in config.value("cpu_sensor_ids", type=str):
+            item = QtWidgets.QTreeWidgetItem(parent)
+            for sensor in sensors:
+                if sensor.label == id:
+                    item.setText(0, sensor.label)
+            item.setText(1, id)
+            item.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))  # Text color blue
 
     # Radio buttons
     ui.radioButtonCPUMax.setChecked(config.value("cpu_use_max", True, type=bool))

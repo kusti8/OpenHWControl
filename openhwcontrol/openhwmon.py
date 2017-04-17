@@ -6,29 +6,50 @@
 """
 
 import sys
-
-import wmi
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-import helper
+from openhwcontrol import helper
 
 
 def initialize_hwmon():
     """Create a WMI object and verify that OpenHardwareMonitor is installed."""
 
     # Access the OpenHWMon WMI interface
+    if os.name != 'nt':
+        return None
     try:
+        import wmi
         hwmon = wmi.WMI(namespace="root\OpenHardwareMonitor")
         return hwmon
 
     # WMI exception (e.g. no namespace "root\OpenHardwareMonitor" indicates OpenHWMon is not installed
     except:
-        helper.show_error("OpenHardwareMonitor WMI data not found.\n\n"
-                          "Please make sure that OpenHardwareMonitor is installed.\n\n"
-                          "Latest version is available at:\n\n"
-                          "http://openhardwaremonitor.org\n\n"
-                          "The application will now exit.")
-        sys.exit(0)
+        pass
+
+def populate_tree_linux(treeWidget):
+    import psutil
+    hardwares = psutil.sensors_temperatures()
+
+    # No sensor data (empty list) indicates OpenHWMon is not running
+    if not hardwares:
+        return
+
+    # Add hardware nodes and temperature sensors to the three widget
+    for key, nodelist in hardwares.items():
+        item_list = []
+        parent = treeWidget
+        item = QtWidgets.QTreeWidgetItem(parent)
+        item.setText(0, key)  # First column, name of the node
+        item.setText(1, key)  # Second column, node id
+        item.setFlags(QtCore.Qt.ItemIsEnabled)  # Make hardware nodes "not selectable" in the UI
+        for index, node in enumerate(nodelist):
+            parent = item
+            itema = QtWidgets.QTreeWidgetItem(parent)
+            itema.setText(0, node.label)  # First column, name of the node
+            itema.setText(1, node.label)  # Second column, node id
+            itema.setText(2, str(node.current))  # Third column, temperature value
+            itema.setForeground(0, QtGui.QBrush(QtCore.Qt.blue))
+            itema.setForeground(2, QtGui.QBrush(QtCore.Qt.blue))
 
 
 def populate_tree(hwmon, treeWidget):
@@ -75,6 +96,10 @@ def populate_tree(hwmon, treeWidget):
         Value = 30.5;
     };
     """
+    if os.name != 'nt':
+        populate_tree_linux(treeWidget)
+        return
+
 
     # Get a list of hardware nodes
     hardwares = hwmon.Hardware()
@@ -84,8 +109,7 @@ def populate_tree(hwmon, treeWidget):
 
     # No sensor data (empty list) indicates OpenHWMon is not running
     if not sensors:
-        helper.show_notification("No data from OpenHardwareMonitor found.\n\n"
-                                 "Please make sure OpenHardwareMonitor is running.\n\n")
+        return
 
     # The "hardware_nodes" dictionary will hold all hardware nodes and children
     # key = top node identifier
@@ -146,7 +170,12 @@ def get_temperature_sensors(hwmon):
     """Return all temperature sensors"""
 
     # Get a list of temperature sensor nodes (filtered to optimize WMI performance)
-    sensors = hwmon.Sensor(["Name", "Parent", "Value", "Identifier"], SensorType="Temperature")
+    if os.name == 'nt':
+        sensors = hwmon.Sensor(["Name", "Parent", "Value", "Identifier"], SensorType="Temperature")
+    else:
+        import psutil
+        sensors = psutil.sensors_temperatures()
+        sensors = [s for key, s in sensors.items()]
     return sensors
 
 def get_temp(hwmon, id):
@@ -173,6 +202,3 @@ def get_hardware_name(id, hardwares):
     for hardware in hardwares:
         if hardware.Identifier == id:
             return hardware.Name
-
-
-

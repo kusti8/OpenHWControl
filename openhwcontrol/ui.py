@@ -2,6 +2,7 @@
 VERSION="1.0.0"
 import sys
 import threading
+import subprocess
 import os
 import types
 import ctypes
@@ -18,21 +19,21 @@ from serial.tools import list_ports
 
 from hue_plus import webcolors
 
-#from . import gui
-#from . import cooler
-#from . import grid
-#from . import helper
-#from . import openhwmon
-#from . import polling
-#from . import settings
+from openhwcontrol import gui
+from openhwcontrol import cooler
+from openhwcontrol import grid
+from openhwcontrol import helper
+from openhwcontrol import openhwmon
+from openhwcontrol import polling
+from openhwcontrol import settings
 
-import gui
-import cooler
-import grid
-import helper
-import openhwmon
-import polling
-import settings
+# import gui
+# import cooler
+# import grid
+# import helper
+# import openhwmon
+# import polling
+# import settings
 
 import usb.core
 
@@ -850,6 +851,8 @@ class MainWindow(QMainWindow, gui.Ui_MainWindow):
         print(speed, color1, color2, interval, mode, type(color1[0]))
         if self.cooler:
             self.error("Status: " + str(self.cooler.update()))
+        else:
+            self.error("No Kraken found!")
 
     def error(self, message):
         msg = QMessageBox()

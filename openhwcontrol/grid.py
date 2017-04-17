@@ -11,7 +11,7 @@ import time
 import serial
 from serial.tools import list_ports
 
-import helper
+from openhwcontrol import helper
 
 # Time (s) to wait until reading data from Grid after a request (s)
 WAIT_GRID = 0.04
@@ -313,4 +313,3 @@ def calculate_voltage(percent):
         return 11.5
     else:
         return 12.0
-
