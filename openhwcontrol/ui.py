@@ -59,6 +59,7 @@ def main():
     #    sys.exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'.")
     #if not is_admin():
     #    runAsAdmin()
+    sys.excepthook = helper.excepthook
     app = QApplication(sys.argv)
     form = MainWindow()
     form.show()
