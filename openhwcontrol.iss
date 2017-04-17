@@ -15,6 +15,7 @@ DisableProgramGroupPage=yes
 OutputBaseFilename=openhwcontrol-amd64-setup
 Compression=lzma
 SolidCompression=yes
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
