@@ -52,7 +52,7 @@ install:
 
 build_script:
   # Build the compiled extension
-  - "%CMD_IN_ENV% python setup-exe.py build_msi"
+  - "%CMD_IN_ENV% python setup-exe.py bdist_msi"
 
 test_script:
 
