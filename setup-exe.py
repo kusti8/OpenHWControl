@@ -16,7 +16,7 @@ setup(name='openhwcontrol',
       author_email='kusti8@gmail.com',
       license='GPL3',
       packages=['openhwcontrol'],
-      executables = [Executable("openhwcontrol/ui.py", base = "Win32GUI", shortcutName="OpenHWControl")],
+      executables = [Executable("openhwcontrol/ui.py", base = "Win32GUI", shortcutName="OpenHWControl", shortcutDir="DesktopFolder")],
       install_requires=[
           'hue_plus',
           'pyusb'
