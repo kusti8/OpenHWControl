@@ -2296,6 +2296,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.label_107.setFont(font)
         self.label_107.setTextFormat(QtCore.Qt.RichText)
+        self.label_107.setOpenExternalLinks(True)
         self.label_107.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
         self.label_107.setObjectName("label_107")
         MainWindow.setCentralWidget(self.centralwidget)
